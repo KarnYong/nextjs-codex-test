@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function Home() {
   const res = await fetch("https://www.melivecode.com/api/attractions", {
@@ -13,21 +14,23 @@ export default async function Home() {
         {attractions.map((attraction) => (
           <div
             key={attraction.id}
-            className="bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow"
+            className="bg-green-100 dark:bg-green-900 rounded-lg overflow-hidden shadow"
           >
-            <Image
-              src={attraction.coverimage}
-              alt={attraction.name}
-              width={400}
-              height={250}
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-4">
-              <h2 className="font-medium text-lg mb-1">{attraction.name}</h2>
-              <p className="text-sm text-gray-700 dark:text-gray-300 line-clamp-3">
-                {attraction.detail}
-              </p>
-            </div>
+            <Link href={`/attractions/${attraction.id}`} className="block hover:opacity-90">
+              <Image
+                src={attraction.coverimage}
+                alt={attraction.name}
+                width={400}
+                height={250}
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-4">
+                <h2 className="font-medium text-lg mb-1">{attraction.name}</h2>
+                <p className="text-sm text-green-800 dark:text-green-200 line-clamp-3">
+                  {attraction.detail}
+                </p>
+              </div>
+            </Link>
           </div>
         ))}
       </div>
